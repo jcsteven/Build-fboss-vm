@@ -8,13 +8,6 @@
 # -------------------------------------------------------
 source 0.0_comm.sh
 
-echo "==> sudo rm -rf ${BUILD_OUTPUT}"
-sudo rm -rf ${BUILD_OUTPUT}
-
-echo "==> sudo rm -rf ${GITHUB_WORKSPACE}"
-sudo rm -rf ${GITHUB_WORKSPACE}
-echo "==> sudo rm -rf ${GITHUB_TESTSPACE}"
-sudo rm -rf ${GITHUB_TESTSPACE}
-
-
-
+echo "==> Clean Docker system"
+echo "==> sudo docker container kill -a && sudo docker container prune -f"
+echo "==> sudo docker image prune -af"
