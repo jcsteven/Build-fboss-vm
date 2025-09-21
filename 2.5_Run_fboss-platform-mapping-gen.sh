@@ -13,7 +13,7 @@ pushd  $GITHUB_WORKSPACE
 
 #PLATFORM_NAME="montblanc"
 #PLATFORM_NAME="minipack3n"
-PLATFORM_NAME="wedge800ba" 
+PLATFORM_NAME="wedge800ba"
 
 PMG_CMD="${BUILD_OUTPUT}/build/fboss/fboss-platform-mapping-gen"
 INPUT_DIR="${GITHUB_WORKSPACE}"
@@ -22,6 +22,8 @@ echo "OUTPUT_DIR=${OUTPUT_DIR}"
 echo "INPUT_DIR=${INPUT_DIR}"
 echo "PLATFORM_NAME=${PLATFORM_NAME}"
 
+
+pushd  $GITHUB_WORKSPACE
 TO_CMD_1="y"
 if [[ "${TO_CMD_1}" == "y" ]]; then
     mkdir -p ${OUTPUT_DIR}
@@ -29,5 +31,4 @@ if [[ "${TO_CMD_1}" == "y" ]]; then
     echo "==> $cmdl"
     $cmdl
 fi
-
 popd

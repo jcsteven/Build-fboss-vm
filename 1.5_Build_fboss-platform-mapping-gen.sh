@@ -7,12 +7,14 @@
 #   When use: './<this script file>  '
 # -------------------------------------------------------
 source 0.0_comm.sh
-
-export GITHUB_ACTIONS_BUILD=1 
-printenv GITHUB_ACTIONS_BUILD
+current_dir=$(pwd)
+TARGET="fboss-platform-mapping-gen"
+LOG_DIR=${current_dir}/build_log/
+BUILD_LOG=$LOG_DIR/fboss_build-${TARGET}-$(date +"%Y%m%d_%H%M%S").log
+mkdir -p ${LOG_DIR}
 
 cpu_count=$(grep -c ^processor /proc/cpuinfo)
-
+#cpu_count=16
 echo "CPU Count=$cpu_count"
 
 pushd  $GITHUB_WORKSPACE
@@ -23,11 +25,13 @@ if [[ "${TO_CMD_0}" == "y" ]]; then
     cmdl+=' --extra-cmake-defines={"CMAKE_BUILD_TYPE":"MinSizeRel","CMAKE_CXX_STANDARD":"20"}' 
     cmdl+=" --scratch-path $BUILD_OUTPUT" 
     cmdl+=" --allow-system-packages" 
-    cmdl+=" --cmake-target  fboss-platform-mapping-gen" 
+    cmdl+=" --cmake-target  $TARGET" 
     cmdl+=" --src-dir ." 
     cmdl+=" fboss" 
 fi
 echo "==> $cmdl"
 $cmdl 
 
+echo "==> $cmdl" 2>&1 | tee -a $BUILD_LOG
+$cmdl  2>&1 | tee -a $BUILD_LOG
 popd

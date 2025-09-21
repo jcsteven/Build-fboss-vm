@@ -8,29 +8,31 @@
 # -------------------------------------------------------
 source 0.0_comm.sh
 current_dir=$(pwd)
-BUILD_LOG=$current_dir/build_log/fboss_build_$(date +"%Y%m%d_%H%M%S").log
-export GITHUB_ACTIONS_BUILD=1 
-printenv GITHUB_ACTIONS_BUILD
+TARGET="fboss_platform_services"
+LOG_DIR=${current_dir}/build_log/
+BUILD_LOG=$LOG_DIR/fboss_build-${TARGET}-$(date +"%Y%m%d_%H%M%S").log
+mkdir -p ${LOG_DIR}
 
 cpu_count=$(grep -c ^processor /proc/cpuinfo)
-
+#cpu_count=16
 echo "CPU Count=$cpu_count"
 
 pushd  $GITHUB_WORKSPACE
-
 TO_CMD_0="y"
 if [[ "${TO_CMD_0}" == "y" ]]; then
     cmdl="./build/fbcode_builder/getdeps.py build  --num-jobs $cpu_count"
     cmdl+=' --extra-cmake-defines={"CMAKE_BUILD_TYPE":"MinSizeRel","CMAKE_CXX_STANDARD":"20"}'
     cmdl+=" --scratch-path $BUILD_OUTPUT" 
     cmdl+=" --allow-system-packages" 
-    cmdl+=" --cmake-target  fboss_platform_services" 
+    cmdl+=" --cmake-target  $TARGET" 
     cmdl+=" --src-dir ." 
     cmdl+=" fboss" 
+    export GITHUB_ACTIONS_BUILD=1
+    echo "==> export GITHUB_ACTIONS_BUILD=1" | tee -a $BUILD_LOG
+    printenv GITHUB_ACTIONS_BUILD | tee -a $BUILD_LOG
 fi
 
-echo "==> $cmdl" 2>&1 | tee $BUILD_LOG 
-$cmdl  2>&1 | tee $BUILD_LOG
-
+echo "==> $cmdl" 2>&1 | tee -a $BUILD_LOG
+$cmdl  2>&1 | tee -a $BUILD_LOG
 popd
 
