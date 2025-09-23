@@ -12,8 +12,23 @@ DOCKER_IMAGE=fboss_centos8
 DOCKER_NAME=FBOSS_CENTOS8
 BUILD="fboss.git"
 TEST="fboss.ttt"
-GITHUB_WORKSPACE="${HOME}/${BUILD}"
-GITHUB_TESTSPACE="${HOME}/${TEST}"
+
+# Get the current working directory
+current_dir=$(pwd)
+echo "Current Directory: $current_dir"
+
+# Check if current directory contains "/data" at beginning
+if [[ "$current_dir" == /data* ]]; then
+    echo "Directory contains /data"
+    HOME_BASE="/data/$(whoami)"
+else
+    echo "Directory does not contain /data"
+    HOME_BASE="/home/$(whoami)"
+fi
+echo "HOME_BASE=${HOME_BASE}"
+
+GITHUB_WORKSPACE="${HOME_BASE}/${BUILD}"
+GITHUB_TESTSPACE="${HOME_BASE}/${TEST}"
 BUILD_OUTPUT_NAME=host-build
-BUILD_OUTPUT="${HOME}/${BUILD_OUTPUT_NAME}"
+BUILD_OUTPUT="${HOME_BASE}/${BUILD_OUTPUT_NAME}"
 BUILS_INSTALLED="${BUILD_OUTPUT}/installed"

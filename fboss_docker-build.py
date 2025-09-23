@@ -64,14 +64,14 @@ def centos_prerequisites(version_id: str):
         print("Build only supported on CentOS Stream 9", file=sys.stderr)
         return 1
 
-    print("Installing podman-docker via dnf")
-    cp = subprocess.run(
-        ["sudo", "dnf", "install", "-y", "podman-docker"], capture_output=True
-    )
-    if cp.returncode != 0:
-        errorMsg = f"An error occurred while attempting to installed podman-docker: {cp.stderr}"
-        print(errorMsg, file=sys.stderr)
-        return cp.returncode
+    #print("Installing podman-docker via dnf")
+    #cp = subprocess.run(
+    #    ["sudo", "dnf", "install", "-y", "podman-docker"], capture_output=True
+    #)
+    #if cp.returncode != 0:
+    #    errorMsg = f"An error occurred while attempting to installed podman-docker: {cp.stderr}"
+    #    print(errorMsg, file=sys.stderr)
+    #    return cp.returncode
     return 0
 
 

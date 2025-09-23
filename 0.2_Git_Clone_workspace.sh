@@ -16,7 +16,7 @@ pushd ~
 
     #cmdl="git clone https://github.com/facebook/fboss  -b fixup-T205733938-main fboss.git"
     #cmdl="git clone https://github.com/facebook/fboss  -b a1cfcb02fa12939761f9e7155295c2cf6f0dc776 fboss.git" ## 2024-1101
-    cmdl="git clone https://github.com/facebook/fboss  fboss.git"
+    cmdl="git clone https://github.com/facebook/fboss  ${GITHUB_WORKSPACE}"
     echo "==> $cmdl"
     $cmdl
 
