@@ -1,0 +1,8 @@
+{
+    "1": {"name": "fboss_platform_service"},
+    "2": {"name": "qsfp_targets"},
+    "3": {"name": "platform_manager"},
+    "4": {"name": "fboss_fake_agent_targets"},
+    "5": {"name": "fboss-platform-mapping-gen"},
+    "6": {"name": "github_actions_fboss_other_services"}
+}
