@@ -15,9 +15,9 @@ pushd $GITHUB_WORKSPACE
     rm -rf build/deps/github_hashes/facebook
     rm -rf build/deps/github_hashes/facebookincubator
 
-    git stash # This is to save the build-helper changes
-    git pull
-    git stash pop # This is to restore the build-helper changes
+    #git stash # This is to save the build-helper changes
+    #git pull
+    #git stash pop # This is to restore the build-helper changes
 
     # Optionally ping to latest stable commit hashes
     tar -xvf fboss/oss/stable_commits/latest_stable_hashes.tar.gz
