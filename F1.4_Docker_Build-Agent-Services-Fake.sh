@@ -9,7 +9,7 @@
 set -e
 source 0.0_comm.sh
 current_dir=$(pwd)
-TARGET="fboss_platform_services"
+TARGET="fboss_fake_agent_targets"
 LOG_DIR=${current_dir}/build_log/
 BUILD_LOG=$LOG_DIR/Docker_build-${TARGET}-$(date +"%Y%m%d_%H%M%S").log
 mkdir -p ${LOG_DIR}
@@ -34,7 +34,7 @@ if [[ "${TO_CMD_BUILD}" == "y" ]]; then
         --target ${TARGET} \
         --no-docker-output \
         --no-system-deps \
-        --env-var GITHUB_ACTIONS_BUILD \
+        --env-var BUILD_SAI_FAKE \
         --num-jobs $(($cpu_count - 4)) \
         --local" | tee -a $BUILD_LOG
 
@@ -44,7 +44,7 @@ if [[ "${TO_CMD_BUILD}" == "y" ]]; then
         --target ${TARGET} \
         --no-docker-output \
         --no-system-deps \
-        --env-var GITHUB_ACTIONS_BUILD \
+        --env-var BUILD_SAI_FAKE \
         --num-jobs $(($cpu_count - 4)) \
         --local 2>&1 | tee -a $BUILD_LOG
     popd 

@@ -15,7 +15,8 @@ if [[ "${TO_CMD_UNITTEST}" == "y" ]]; then
     # Verification: Run unit tests using the packaged binaries
     pushd  $GITHUB_WORKSPACE
     echo "Running unit tests..."
-    sudo ./fboss/oss/scripts/github_actions/docker-unittest.py \
+    # ./fboss/oss/scripts/github_actions/fbossdocker-unittest.py
+    sudo ${current_dir}/fboss_docker-unittest.py \
       ${BUILD_OUTPUT}/fboss_bins.tar.zst
     popd
 fi
