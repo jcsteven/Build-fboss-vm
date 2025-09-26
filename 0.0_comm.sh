@@ -8,8 +8,8 @@
 # -------------------------------------------------------
 ## 1. Initial setup on VM export CONTAINER_TAR=fboss_centos8.tar
 CONTAINER_TAR=fboss_centos8.tar
-DOCKER_IMAGE=fboss_centos8
-DOCKER_NAME=FBOSS_CENTOS8
+DOCKER_IMAGE=fboss_images_${USER}
+DOCKER_NAME=fboss_docker_${USER}
 BUILD="fboss.git"
 TEST="fboss.ttt"
 
@@ -29,6 +29,8 @@ echo "HOME_BASE=${HOME_BASE}"
 
 GITHUB_WORKSPACE="${HOME_BASE}/${BUILD}"
 GITHUB_TESTSPACE="${HOME_BASE}/${TEST}"
+DOCKER_WORKSPACE="/var/FBOSS//${BUILD}"
 BUILD_OUTPUT_NAME=host-build
 BUILD_OUTPUT="${HOME_BASE}/${BUILD_OUTPUT_NAME}"
 BUILS_INSTALLED="${BUILD_OUTPUT}/installed"
+DOCKER_BUILD_OUTPUT="/var/FBOSS/${BUILD_OUTPUT_NAME}"

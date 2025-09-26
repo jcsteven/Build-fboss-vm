@@ -9,7 +9,7 @@
 set -e
 source 0.0_comm.sh
 current_dir=$(pwd)
-TARGET="fboss_platform_services"
+#TARGET="fboss_platform_services"
 LOG_DIR=${current_dir}/build_log/
 BUILD_LOG=$LOG_DIR/Docker_build-${TARGET}-$(date +"%Y%m%d_%H%M%S").log
 mkdir -p ${LOG_DIR}

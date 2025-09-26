@@ -124,13 +124,13 @@ def is_hw_test(path: str) -> bool:
     return os.path.isfile(path) and os.access(path, os.X_OK)
 
 
-def run_test(test: str, output_dir: str) -> bool:
-    use_stable_hashes()
+def run_test(test: str, output_dir: str, fboss_dir: str) -> bool:
+    #use_stable_hashes()
     cmd_args = ["sudo", "docker", "run"]
     lib_path = os.path.join(output_dir, "lib")
     cmd_args.extend(["-e", f"LD_LIBRARY_PATH={lib_path}"])
     # Mount fboss repository in container
-    cmd_args.extend(["-v", f"{get_repo_path()}:{CONTAINER_WORKDIR}:z"])
+    cmd_args.extend(["-v", f"{fboss_dir}:{CONTAINER_WORKDIR}:z"])
     cmd_args.extend(["-v", f"{output_dir}:{output_dir}:z"])
     # Add required capability for sudo permissions
     cmd_args.append("--cap-add=CAP_AUDIT_WRITE")
@@ -148,7 +148,7 @@ def main():
     print(f"fboss_path={fboss_path}")
     docker_path = f"{fboss_path}/fboss/oss/docker"
     print(f"Using docker directory path: {docker_path}")    
-    build_docker_image(docker_path)
+    #build_docker_image(docker_path)
 
     output_dir = unpack_tarball(args.fboss_tar)
 
@@ -157,7 +157,7 @@ def main():
     failed_tests = []
 
     for test in tests:
-        is_pass = run_test(test, output_dir)
+        is_pass = run_test(test, output_dir,fboss_path)
         if not is_pass:
             failed_tests.append(test)
 

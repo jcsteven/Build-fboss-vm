@@ -241,7 +241,7 @@ def run_fboss_build(
     use_local: bool,
     num_jobs: Optional[int],
 ):
-    use_stable_hashes()
+    #use_stable_hashes()
 
     cmd_args = ["sudo", "docker", "run"]
     # Add build environment variables, if any.
@@ -348,7 +348,7 @@ def main():
         args.num_jobs,
     )
 
-    cleanup_fboss_build_container()
+    #cleanup_fboss_build_container()
 
     return status_code
 

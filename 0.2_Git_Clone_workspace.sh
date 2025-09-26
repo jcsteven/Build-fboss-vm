@@ -10,7 +10,6 @@ source 0.0_comm.sh
 
 TO_CLONE_WORKSPACE="y"
 if [[ "${TO_CLONE_WORKSPACE}" == "y" ]]; then
-pushd ~ 
     echo "==> mkdir -p $BUILD_OUTPUT"
     mkdir -p $BUILD_OUTPUT
 
@@ -27,6 +26,13 @@ TO_STABLE_FBOSS_DEP="n"
 if [[ "${TO_STABLE_FBOSS_DEP}" == "y" ]]; then
     pushd  pushd $GITHUB_WORKSPACE
     echo "==> Work in `pwd`"
+    #git reset --hard 61011a76a62f61bea7ee60f4ca6e8dfa91fd87b3 # 2025-0924
+    #git reset --hard 3ae6f99ee05bd97a0f5ac369c4c1ec3eab375a9a # 2025-0923 -1: 3ae6f99ee05bd97a0f5ac369c4c1ec3eab375a9a
+    #git reset --hard 6d66175dca45afbc8c870b2caa9a8e55ebb492f6 # 2025-0923-2: 6d66175dca45afbc8c870b2caa9a8e55ebb492f6
+    #git reset --hard e6187b4c5d779b41d913217811f9b270ed2af117 # 2025-0923-3: e6187b4c5d779b41d913217811f9b270ed2af117
+    #git reset --hard 9777affa055201cd6d48150aa6cba4c24f5a9fdd # 2025-0919-1: 9777affa055201cd6d48150aa6cba4c24f5a9fdd
+
+
     rm -rf build/deps/github_hashes/
     tar xvzf fboss/oss/stable_commits/latest_stable_hashes.tar.gz
     #./build/fbcode_builder/getdeps.py install-system-deps --recursive fboss
