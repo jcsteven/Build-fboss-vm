@@ -13,8 +13,8 @@ from pathlib import Path
 ARG_FBOSS_TARBALL = "fboss_tar"
 
 # TODO: paulcruz74 - deduplicate this from docker-build.py
-FBOSS_IMAGE_NAME = "fboss_image"
-FBOSS_CONTAINER_NAME = "FBOSS_BUILD_CONTAINER"
+FBOSS_IMAGE_NAME = "fboss_images_jcyu"
+FBOSS_CONTAINER_NAME = "fboss_docker_tester"
 
 TEST_PATH_REGEX = re.compile(".*tests?$")
 HW_TEST_PATH_REGEX = re.compile(".*hw_tests?$")

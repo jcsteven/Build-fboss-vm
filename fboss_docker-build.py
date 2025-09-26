@@ -335,7 +335,7 @@ def main():
     #docker_dir_path = get_docker_path()
     docker_dir_path = f"{fboss_path}/fboss/oss/docker"
     print(f"Using docker directory path: {docker_dir_path}")
-    build_docker_image(docker_dir_path)
+    #build_docker_image(docker_dir_path)
 
     status_code = run_fboss_build(
         fboss_path,
