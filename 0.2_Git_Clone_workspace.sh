@@ -18,13 +18,11 @@ if [[ "${TO_CLONE_WORKSPACE}" == "y" ]]; then
     cmdl="git clone https://github.com/facebook/fboss  ${GITHUB_WORKSPACE}"
     echo "==> $cmdl"
     $cmdl
-
-popd
 fi
 
 TO_STABLE_FBOSS_DEP="n"
 if [[ "${TO_STABLE_FBOSS_DEP}" == "y" ]]; then
-    pushd  pushd $GITHUB_WORKSPACE
+    pushd $GITHUB_WORKSPACE
     echo "==> Work in `pwd`"
     #git reset --hard 61011a76a62f61bea7ee60f4ca6e8dfa91fd87b3 # 2025-0924
     #git reset --hard 3ae6f99ee05bd97a0f5ac369c4c1ec3eab375a9a # 2025-0923 -1: 3ae6f99ee05bd97a0f5ac369c4c1ec3eab375a9a
