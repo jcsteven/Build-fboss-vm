@@ -9,7 +9,13 @@
 source 0.0_comm.sh
 
 echo "==> sudo rm -rf ${BUILD_OUTPUT}/*"
-sudo rm -rf ${BUILD_OUTPUT}/*
+#sudo rm -rf ${BUILD_OUTPUT}/downloads
+sudo rm -rf ${BUILD_OUTPUT}/build
+sudo rm -rf ${BUILD_OUTPUT}/repos
+sudo rm -rf ${BUILD_OUTPUT}/installed
+sudo rm -rf ${BUILD_OUTPUT}/extracted
+sudo rm -rf ${BUILD_OUTPUT}/fboss_bins.tar.zst
+sudo rm -rf ${BUILD_OUTPUT}/fboss_bins-*
 
 echo "==> sudo rm -rf ${GITHUB_WORKSPACE}"
 sudo rm -rf ${GITHUB_WORKSPACE}
