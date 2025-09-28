@@ -7,24 +7,30 @@
 #   When use: './<this script file>  '
 # -------------------------------------------------------
 source 0.0_comm.sh
+current_dir=$(pwd)
+TARGET="fboss_fake_agent_targets"
+LOG_DIR=${current_dir}/build_log/
+BUILD_LOG=$LOG_DIR/fboss_build-${TARGET}-$(date +"%Y%m%d_%H%M%S").log
+mkdir -p ${LOG_DIR}
 
 cpu_count=$(grep -c ^processor /proc/cpuinfo)
-cpu_count=16
+#cpu_count=16
 echo "CPU Count=$cpu_count"
 
 pushd  $DOCKER_WORKSPACE
-    TO_CMD_1="y"
-    if [[ "${TO_CMD_1}" == "y" ]]; then
-        cmdl="./build/fbcode_builder/getdeps.py build  --num-jobs $cpu_count"
-        cmdl+=' --extra-cmake-defines={"CMAKE_BUILD_TYPE":"MinSizeRel","CMAKE_CXX_STANDARD":"20"}'
-        cmdl+=" --scratch-path ${DOCKER_BUILD_OUTPUT}" 
-        cmdl+=" --allow-system-packages fboss" 
-        cmdl+=" --cmake-target  platform_manager" 
-        cmdl+=" --src-dir ." 
-        export BUILD_SAI_FAKE=1 
-    fi
+TO_CMD_0="y"
+if [[ "${TO_CMD_0}" == "y" ]]; then
+    cmdl="./build/fbcode_builder/getdeps.py build  --num-jobs $cpu_count"
+    cmdl+=' --extra-cmake-defines={"CMAKE_BUILD_TYPE":"MinSizeRel","CMAKE_CXX_STANDARD":"20"}'
+    cmdl+=" --scratch-path ${DOCKER_BUILD_OUTPUT}"
+    cmdl+=" --allow-system-packages"
+    cmdl+=" --cmake-target  ${TARGET}"
+    cmdl+=" --src-dir ."
+    cmdl+=" fboss"
+    export GITHUB_ACTIONS_BUILD=1
+    printenv GITHUB_ACTIONS_BUILD
+fi
 
-    echo "==> $cmdl"
-    $cmdl 
-
+echo "==> $cmdl" 2>&1 | tee -a $BUILD_LOG
+$cmdl  2>&1 | tee -a $BUILD_LOG
 popd
