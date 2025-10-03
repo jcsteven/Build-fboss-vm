@@ -14,12 +14,12 @@ current_dir=$(pwd)
 # remove_fboss_containers.sh
 
 # Find all containers from fboss_image (any tag) with ID, Image, and Name
-containers=$(sudo docker ps -a --filter "ancestor=fboss_images_jcyu" --format "{{.ID}} {{.Image}} {{.Names}}")
+containers=$(sudo docker ps -a --filter "ancestor=${DOCKER_IMAGE}" --format "{{.ID}} {{.Image}} {{.Names}}")
 
 if [ -z "$containers" ]; then
-    echo "No containers found from fboss_images_jcyu."
+    echo "No containers found from ${DOCKER_IMAGE}."
 else
-    echo "Removing containers fromfboss_images_jcyu one by one..."
+    echo "Removing containers from ${DOCKER_IMAGE} one by one..."
     echo
     # Loop through each container line
     while read -r id image name; do
