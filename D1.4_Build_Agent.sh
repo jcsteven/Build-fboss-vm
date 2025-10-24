@@ -27,8 +27,9 @@ if [[ "${TO_CMD_0}" == "y" ]]; then
     cmdl+=" --cmake-target  ${TARGET}"
     cmdl+=" --src-dir ."
     cmdl+=" fboss"
-    export GITHUB_ACTIONS_BUILD=1
-    printenv GITHUB_ACTIONS_BUILD
+    export BUILD_SAI_FAKE=1
+    echo "==>export BUILD_SAI_FAKE=1" | tee -a $BUILD_LOG
+    printenv BUILD_SAI_FAKE | tee -a $BUILD_LOG
 fi
 
 echo "==> $cmdl" 2>&1 | tee -a $BUILD_LOG

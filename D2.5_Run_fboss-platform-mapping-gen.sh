@@ -20,7 +20,8 @@ echo "CPU Count=$cpu_count"
 pushd  $DOCKER_WORKSPACE
 PLATFORM_NAME="montblanc"
 #PLATFORM_NAME="minipack3n"
-#PLATFORM_NAME="wedge800ba" 
+#PLATFORM_NAME="wedge800b_act"
+#PLATFORM_NAME="wedge800c_act" 
 
 PMG_CMD="${DOCKER_BUILD_OUTPUT}/build/fboss/fboss-platform-mapping-gen"
 INPUT_DIR="${DOCKER_WORKSPACE}"
