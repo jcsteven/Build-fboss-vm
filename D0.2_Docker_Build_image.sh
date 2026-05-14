@@ -12,5 +12,5 @@ pushd $GITHUB_WORKSPACE
     #sudo docker build . -t $DOCKER_IMAGE -f fboss/oss/docker/Dockerfile
     cmdl="sudo docker build . -t $DOCKER_IMAGE -f fboss/oss/docker/Dockerfile" 
     echo "==> $cmdl"
-    $cmdl
+    eval $cmdl
 popd

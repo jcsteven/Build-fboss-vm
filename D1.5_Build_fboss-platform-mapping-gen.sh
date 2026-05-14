@@ -21,15 +21,17 @@ echo "CPU Count=$cpu_count"
 pushd  $DOCKER_WORKSPACE
 TO_CMD_0="y"
 if [[ "${TO_CMD_0}" == "y" ]]; then
-    cmdl="./build/fbcode_builder/getdeps.py build  --num-jobs $cpu_count"
-    cmdl+=' --extra-cmake-defines={"CMAKE_BUILD_TYPE":"MinSizeRel","CMAKE_CXX_STANDARD":"20"}'
-    cmdl+=" --scratch-path ${DOCKER_BUILD_OUTPUT}"
+    cmdl="./fboss/oss/scripts/run-getdeps.py build"
+    cmdl=" --num-jobs $cpu_count"
     cmdl+=" --allow-system-packages"
+    cmdl+=" --build-type MinSizeRel"   
+    cmdl+=" --extra-cmake-defines='{\"CMAKE_CXX_STANDARD\": \"20\", \"RANGE_V3_TESTS\": \"OFF\", \"RANGE_V3_PERF\": \"OFF\"}'"
+    cmdl+=" --scratch-path ${DOCKER_BUILD_OUTPUT}"
     cmdl+=" --cmake-target  ${TARGET}"
     cmdl+=" --src-dir ."
     cmdl+=" fboss"
 fi
 
 echo "==> $cmdl" 2>&1 | tee -a $BUILD_LOG
-$cmdl  2>&1 | tee -a $BUILD_LOG
+eval $cmdl  2>&1 | tee -a $BUILD_LOG
 popd

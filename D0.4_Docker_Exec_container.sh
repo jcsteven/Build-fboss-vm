@@ -10,4 +10,4 @@ source 0.0_comm.sh
 
 cmdl="sudo docker exec -it $DOCKER_NAME bash" 
 echo "==> $cmdl"
-$cmdl
+eval $cmdl
