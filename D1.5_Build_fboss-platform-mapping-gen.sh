@@ -9,7 +9,8 @@
 source 0.0_comm.sh
 current_dir=$(pwd)
 #TARGET="github_actions_fboss_platform_services"
-TARGET="fboss-platform-mapping-gen"
+#TARGET="fboss-platform-mapping-gen"
+TARGET="fboss_platform_mapping_gen"
 LOG_DIR=${current_dir}/build_log/
 BUILD_LOG=$LOG_DIR/fboss_build-${TARGET}-$(date +"%Y%m%d_%H%M%S").log
 mkdir -p ${LOG_DIR}
@@ -22,7 +23,7 @@ pushd  $DOCKER_WORKSPACE
 TO_CMD_0="y"
 if [[ "${TO_CMD_0}" == "y" ]]; then
     cmdl="./fboss/oss/scripts/run-getdeps.py build"
-    cmdl=" --num-jobs $cpu_count"
+    cmdl+=" --num-jobs $cpu_count"
     cmdl+=" --allow-system-packages"
     cmdl+=" --build-type MinSizeRel"   
     cmdl+=" --extra-cmake-defines='{\"CMAKE_CXX_STANDARD\": \"20\", \"RANGE_V3_TESTS\": \"OFF\", \"RANGE_V3_PERF\": \"OFF\"}'"
